@@ -25,6 +25,7 @@ Route::middleware(['security'])->group(function () {
     Route::get('allCategories', [CategoryController::class, 'getAll']);
     Route::get('transactions', [TransactionController::class, 'index']);
     Route::post('transactions', [TransactionController::class, 'store']);
+    Route::delete('transactions/{id}', [TransactionController::class, 'delete']);
     Route::get('users', [AuthController::class, 'getUsers']);
     Route::post('calculate', [CashFundController::class, 'calculate']);
     Route::post('cash_fund', [CashFundController::class, 'store']);

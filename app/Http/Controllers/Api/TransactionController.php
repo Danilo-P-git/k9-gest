@@ -29,9 +29,14 @@ class TransactionController extends Controller
     }
     public function store(Request $request)
     {
+
         $transaction_date = $request->transaction_date;
         $transaction_formatted = new Carbon($transaction_date);
-        $transaction = new Transaction();
+        if ($request->id != null) {
+            $transaction = Transaction::find($request->id);
+        } else {
+            $transaction = new Transaction();
+        }
         $transaction->transaction_date = $transaction_formatted;
         $transaction->quote = $request->quote;
         $transaction->category_id = $request->category_id;
@@ -41,9 +46,7 @@ class TransactionController extends Controller
         $transaction->save();
         return response()->json($transaction);
     }
-    public function show($id)
-    {
-    }
+
     public function delete($id)
     {
         $transaction = Transaction::find($id);
