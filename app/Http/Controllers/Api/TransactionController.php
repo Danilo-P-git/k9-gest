@@ -42,7 +42,11 @@ class TransactionController extends Controller
         $transaction->category_id = $request->category_id;
         $transaction->user_id = $request->user_id;
         $transaction->transaction_type = $request->transaction_type;
-        $transaction->note = $request->note;
+        if ($request->note == null) {
+            $transaction->note = '';
+        } else {
+            $transaction->note = $request->note;
+        }
         $transaction->save();
         return response()->json($transaction);
     }
